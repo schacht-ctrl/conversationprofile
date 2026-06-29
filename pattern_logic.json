@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26 14:29:58",
+  "generated_at": "2026-06-29 08:10:53",
   "schema_version": "1.0",
   "modules": [
     {
@@ -39,7 +39,7 @@
           "id": "verb_gate",
           "label": "Verb-Gate (bidirektional)",
           "type": "detection",
-          "trigger": "Ein Informationsfeld muss innerhalb von 60 Zeichen ohne Satzgrenze (kein ?, ., !) zusammen mit einem Anfrage-Verb auftreten. Das Feld kann dem Verb vorangehen oder nachfolgen. Aktuelle Anfrage-Verben: nennen, angeben, mitteilen, buchstabieren, wiederholen, vollständig, komplett, benötige, brauche, könnten Sie, können Sie, teilen Sie mir mit, geben Sie mir.",
+          "trigger": "Ein Informationsfeld muss innerhalb von 60 Zeichen ohne Satzgrenze (kein ?, ., !) zusammen mit einem Anfrage-Verb auftreten. Das Feld kann dem Verb vorangehen oder nachfolgen. Aktuelle Anfrage-Verben: nennen, angeben, mitteilen, buchstabieren, wiederholen, vollständig.",
           "example": "'Könnten Sie mir Ihre Kundennummer nennen?' → Kundennummer erkannt",
           "notes": "Die Satzgrenzenbeschränkung verhindert, dass ein Verb in einem Satz ein Feldwort im nächsten Satz irrtümlich aktiviert."
         },
@@ -69,14 +69,14 @@
           "id": "verify_exclusion",
           "label": "Bestätigungsbeiträge ausschließen",
           "type": "exclusion",
-          "trigger": "Ein AI Agent-Beitrag wird als Bestätigung (nicht als Request) eingestuft, wenn er eine der folgenden Strukturen enthält: (1) Bestätigungsverb direkt vor einem Platzhalter — aktuelle Bestätigungsverben: ist, lautet, habe, haben, notiert, erhalten, aufgenommen, eingetragen, gespeichert, vermerkt, hinterlegt; (2) 'als [PLATZHALTER]'; (3) Aufzählungszeile: '- Ihr Name: [PLATZHALTER]'; (4) Feldwort unmittelbar gefolgt von Platzhalter.",
+          "trigger": "Ein AI Agent-Beitrag wird als Bestätigung (nicht als Request) eingestuft, wenn er eine der folgenden Strukturen enthält: (1) Bestätigungsverb direkt vor einem Platzhalter — aktuelle Bestätigungsverben: ist, lautet, habe, haben, notiert, erhalten; (2) 'als [PLATZHALTER]'; (3) Aufzählungszeile: '- Ihr Name: [PLATZHALTER]'; (4) Feldwort unmittelbar gefolgt von Platzhalter.",
           "example": "'Danke, Ihre E-Mail-Adresse ist [EMAIL_ADDRESS].' → kein Request"
         },
         {
           "id": "intent_override",
           "label": "Request-Absicht überschreibt Bestätigung",
           "type": "override",
-          "trigger": "Wenn ein Beitrag gleichzeitig als Bestätigung und als Request erkannt wird, gewinnt der Request — sofern mindestens eines der folgenden Absichtswörter vorhanden ist: buchstabieren, Könnten Sie, bitte, noch einmal, erneut, nochmals, vollständig, komplett, wiederholen, fehlen, unvollständig, nicht erhalten, nennen Sie, korrekt, stimmt das, ist das richtig.",
+          "trigger": "Wenn ein Beitrag gleichzeitig als Bestätigung und als Request erkannt wird, gewinnt der Request — sofern mindestens eines der folgenden Absichtswörter vorhanden ist: buchstabieren, Könnten Sie, bitte, noch einmal, erneut, nochmals.",
           "example": "'Bisher habe ich [NUMBER]. Könnten Sie die vollständige Nummer nennen?' → Telefon erkannt",
           "notes": "Absichtswörter werden regelmäßig erweitert; die aktuelle Liste ist oben angegeben."
         }
@@ -202,7 +202,7 @@
           "id": "swear_words",
           "label": "Schimpfwort-Erkennung",
           "type": "detection",
-          "trigger": "Erkennt folgende Schimpfwort-Stämme und ihre Ableitungen (Groß-/Kleinschreibung ignoriert): Scheiß*, Dreck*, dumm*, Mist* (nicht: Mister), blöd*, Idiot*, Depp*, Trottel*, Kacke*, Arschloch*, Arsch*, Vollidiot*, Wichser*, Versager*, fick*, verdamm*, Schwachkopf*, Nutte*, Hure*, Schlampe*, Wixer*, kurwa*, *** (drei oder mehr Sternchen als Zensur-Platzhalter). Sternchen-Folgen von 3+ Zeichen (***) gelten als zensierte Ausdrücke.",
+          "trigger": "Erkennt folgende Schimpfwort-Stämme und ihre Ableitungen (Groß-/Kleinschreibung ignoriert): Scheiß*, Dreck*, dumm*, Mist* (nicht: Mister), blöd*, Idiot*, etc. Sternchen-Folgen von 3+ Zeichen (***) gelten als zensierte Ausdrücke.",
           "applies_to": "CALLER",
           "notes": "'Mist' wird nur erkannt, wenn nicht direkt vor 'er' stehend (Mister ausgeschlossen)."
         },
@@ -210,7 +210,7 @@
           "id": "ai_mention",
           "label": "KI-Erwähnung",
           "type": "detection",
-          "trigger": "Erkennt, wenn der Caller den Gesprächspartner als automatisiertes System bezeichnet. Erkannte Begriffe: KI, K.I., künstlich*, Computer*, Roboter*, Maschine*, Automat*, Bot, Sprachassistent*.",
+          "trigger": "Erkennt, wenn der Caller den Gesprächspartner als automatisiertes System bezeichnet. Erkannte Begriffe: KI, K.I., künstlich*, Computer*, Roboter*, Maschine*.",
           "applies_to": "CALLER"
         },
         {
@@ -505,7 +505,7 @@
           "label": "Ø längster Einzel-Loop",
           "direction": "lower_better",
           "cap": 15.0,
-          "prose": "Mittlere Länge der längsten Einzel-Typ-Loops pro Gespräch.",
+          "prose": "Mittlere Länge der längsten Einzel-Typ-Loop pro Gespräch.",
           "notes": "Cap: 15.0. Alle Gespräche im Nenner."
         }
       ],
